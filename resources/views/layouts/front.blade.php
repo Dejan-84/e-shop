@@ -53,6 +53,8 @@
 
     <script src="{{ asset('frontend/js/custom.js') }}"></script>
 
+    <script src="{{ asset('frontend/js/checkout.js') }}"></script>
+
     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 
     @if (session('status'))

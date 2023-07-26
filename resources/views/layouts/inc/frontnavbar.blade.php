@@ -14,7 +14,18 @@
             <a class="nav-link" href="{{ url('category') }}">Category</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="{{ url('cart') }}">Cart</a>
+            
+              <a class="nav-link " href="{{ url('cart') }}">Cart
+                
+                <span class="position-absolute top-0 pt-3 ps-0 badge rounded-pill cart-count">0</span>
+                
+              </a>
+            
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url('wishlist') }}">Wishlist
+              <span class="position-absolute top-0 pt-3 ps-0 badge rounded-pill wishlist-count">0</span>
+            </a>
           </li>
 
           @if (Auth::check())
@@ -44,6 +55,11 @@
                 {{ Auth::user()->name }}
               </a>
               <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <li>
+                    <a class="dropdown-item" href="{{ url('my-orders') }}">
+                      My Orders
+                    </a>
+                  </li>
                   <li>
                     <a class="dropdown-item" href="#">
                       My Profile

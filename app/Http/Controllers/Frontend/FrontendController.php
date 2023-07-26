@@ -5,7 +5,10 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\Rating;
 use App\Models\Category;
+use App\Models\Review;
+use Illuminate\Support\Facades\Auth;
 
 class FrontendController extends Controller
 {
@@ -28,6 +31,7 @@ class FrontendController extends Controller
 
             $category = Category::where('slug',$slug)->first();
             $products = Product::where('cate_id', $category->id)->where('status', '0')->get();
+           
             return view('frontend.products.index', compact('category', 'products'));
         }
         else{
@@ -43,7 +47,20 @@ class FrontendController extends Controller
             if (Product::where('slug',$prod_slug)->exists()) {
 
                 $products = Product::where('slug', $prod_slug)->first();
-                return view('frontend.products.view', compact('products'));
+                $ratings = Rating::where('prod_id', $products->id)->get();
+                $rating_sum = Rating::where('prod_id', $products->id)->sum('stars_rated');
+                $user_rating = Rating::where('prod_id', $products->id)->where('user_id', Auth::id())->first();
+                $reviews = Review::where('prod_id', $products->id)->get();
+                
+                if ($ratings->count() > 0) {
+
+                    $rating_value = $rating_sum/$ratings->count();
+                }
+                else{
+                    $rating_value = 0;
+                }
+                
+                return view('frontend.products.view', compact('products', 'ratings', 'reviews', 'rating_value', 'user_rating'));
             }
             else{
                 return redirect('/')->with('status', 'There is no products.');

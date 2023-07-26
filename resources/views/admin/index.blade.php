@@ -4,7 +4,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h1>Dejan Admin</h1>
+            <h1>Dejan Admin Panel</h1>
         </div>
 
     </div>
