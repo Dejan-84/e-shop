@@ -23,6 +23,15 @@
     padding: 5px !important;
 }
 
+.search-bar{
+  width: 40%;
+  margin-left: 5%;
+}
+
+.ui-menu{
+  z-index: 3500 !important;
+}
+
 .text-danger {
     font-size: 12px;
     font-weight: 700;
